@@ -1,0 +1,30 @@
+version: "3.5"
+
+services:
+  mongo:
+    image: mongo:latest
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    networks:
+      - MONGO
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=cadastro
+      - MONGO_INITDB_ROOT_PASSWORD=cadastro
+    volumes:
+      - type: volume
+        source: MONGO_DATA
+        target: /data/db
+      - type: volume
+        source: MONGO_CONFIG
+        target: /data/configdb
+
+networks:
+  MONGO:
+    name: MONGO
+
+volumes:
+  MONGO_DATA:
+    name: MONGO_DATA
+  MONGO_CONFIG:
+    name: MONGO_CONFIG
